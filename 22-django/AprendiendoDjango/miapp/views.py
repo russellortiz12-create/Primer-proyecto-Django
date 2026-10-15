@@ -50,5 +50,9 @@ def pagina(request):
                             <p> Creado por ADSO Popayan</p> 
                             """)
 
-def contacto(request, nombre, apellidos):
-        return HttpResponse(layaut+f"<h2>Contacto {nombre} {apellidos}</h2>")
+def contacto(request, nombre="", apellidos=""):
+        html = ""
+        if  nombre and apellidos:
+            html += "<p>El nombre completo es: </p>"
+            html += f"<h3>{nombre} {apellidos}</h3>"
+        return HttpResponse(layaut+f"<h2>Contacto </h2>"+html)

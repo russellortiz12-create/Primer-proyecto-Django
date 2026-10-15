@@ -28,6 +28,10 @@ urlpatterns = [
     path('inicio/', views.index, name="inicio"),
     path('hola-mundo/', views.hola_mundo, name="hola_mundo"),
     path('pagina-pruebas/', views.pagina, name="pagina"),
+    path('contacto/', views.contacto, name="Contacto"),
+    path('contacto/<str:nombre>', views.contacto, name="Contacto"),
     path('contacto/<str:nombre>/<str:apellidos>', views.contacto, name="Contacto"),
+    
+    
 ]
 
