@@ -4,18 +4,21 @@ from django.shortcuts import render, HttpResponse
 # MVC = Modelo vista controlador -> Acciones (Metodos)
 # MVT = Modelo template  vista ->  Acciones (Metodos)
 
-layaut = """
+layout = """
 <h1>Sitio WEB con Django | ADSO SENA </h1>
 <hr/>
 <ul>
     <li>
-        <a herf = "/inicio"> Inicio </a>
+        <a href =  "/inicio"> Inicio </a>
     </li>
     <li>
-        <a herf = "/hola-mundo">Hola mundo </a>
+        <a href = "/hola-mundo">Hola mundo </a>
     </li>
     <li>
-        <a herf = "/pagina-pruebas">Pagina pruebas </a>
+        <a href = "/pagina-pruebas">Pagina pruebas </a>
+    </li>
+    <li>
+        <a href = "/contacto">contacto </a>
     </li>
 </ul>
 <hr/>
@@ -36,17 +39,17 @@ def index(request):
         year += 1
 
     html += "</ul>"
-    return HttpResponse(layaut+html)
+    return HttpResponse(layout+html)
 
 def hola_mundo(request):
-        return HttpResponse(layaut+"""
+        return HttpResponse(layout+"""
                                         <h1>Hola mundo con Django!!!</h1>
                                         <h3>Soy Aprendiz ADSO</h3>
                                         """)
 
 def pagina(request):
-        return HttpResponse(layaut+"""
-                            <h1>Paguina de mi web</h1>
+        return HttpResponse(layout+"""
+                            <h1>Pagina de mi web</h1>
                             <p> Creado por ADSO Popayan</p> 
                             """)
 
@@ -55,4 +58,4 @@ def contacto(request, nombre="", apellidos=""):
         if  nombre and apellidos:
             html += "<p>El nombre completo es: </p>"
             html += f"<h3>{nombre} {apellidos}</h3>"
-        return HttpResponse(layaut+f"<h2>Contacto </h2>"+html)
+        return HttpResponse(layout+f"<h2>Contacto </h2>"+html)
