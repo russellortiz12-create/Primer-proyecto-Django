@@ -39,7 +39,7 @@ def index(request):
         year += 1
 
     html += "</ul>"
-    return HttpResponse(layout+html)
+    return render(request, 'index.html')
 
 def hola_mundo(request):
         return HttpResponse(layout+"""
