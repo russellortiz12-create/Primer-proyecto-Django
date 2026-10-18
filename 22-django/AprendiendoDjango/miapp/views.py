@@ -42,16 +42,13 @@ def index(request):
     return render(request, 'index.html')
 
 def hola_mundo(request):
-        return HttpResponse(layout+"""
-                                        <h1>Hola mundo con Django!!!</h1>
-                                        <h3>Soy Aprendiz ADSO</h3>
-                                        """)
+    return render(request, 'hola_mundo.html')
 
-def pagina(request):
-        return HttpResponse(layout+"""
-                            <h1>Pagina de mi web</h1>
-                            <p> Creado por ADSO Popayan</p> 
-                            """)
+def pagina(request, redirigir = 0):
+    if redirigir == 1:
+        return redirect('/inicio/')
+    
+    return render(request. 'pagina.html')
 
 def contacto(request, nombre="", apellidos=""):
         html = ""
