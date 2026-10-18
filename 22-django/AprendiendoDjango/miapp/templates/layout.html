@@ -5,41 +5,38 @@
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <title>
         {% block title %}
-        <!-- titulo de cada pagina-->
+    
         {% endblock %}
-
-        |ADSO SENA</title>
+        | ADSO SENA</title>
+     
 </head>
 <body>
     <h1>Sitio WEB con Django | ADSO SENA </h1>
     <hr/>
     <ul>
         <li>
-            <a href =  "/inicio"> Inicio </a>
+            <a href="/inicio">Inicio</a>
         </li>
         <li>
-            <a href = "/hola-mundo">Hola mundo </a>
+            <a href="/hola-mundo">Hola mundo</a>
         </li>
         <li>
-            <a href = "/pagina-pruebas">Pagina pruebas </a>
+            <a href="/pagina-pruebas">Pagina pruebas</a>
         </li>
         <li>
-            <a href = "/contacto">contacto </a>
+            <a href="/contacto">contacto</a>
         </li>
     </ul>
     <hr/>
 
     <div id="content">
-        {% blokc content %}
-        
+        {% block content %}
+            <!-- Código que viene de los templates -->
         {% endblock %}
     </div>
+    <hr>
     <footer>
         CURSO DE PYTHON &COPY; ADSO SENA 2026
-            <!-- COdigo que viene del templates-->
     </footer>
-
-
-    
 </body> 
 </html>
