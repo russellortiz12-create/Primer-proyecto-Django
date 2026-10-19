@@ -18,8 +18,9 @@
 
     <!-- Cabecera de la pagina-->
     <header>
-        <div id"logotipo">
+        <div id="logotipo">
             <!-- logo Django-->
+            <img src="{% static 'images/django_logo.png' %}" />
             <h1> Sitio WEB con Django </h1>
         </div>
     </header>
@@ -42,11 +43,14 @@
     </nav>
 
     <div id="content">
-        <h2 class="title"Titulo de prueba></h2>
-        {% block content %}
+        <div class="box">
+             <h2 class="title"Titulo de prueba></h2>
+            {% block content %}
             <!-- Código que viene de los templates -->
-             <strong>contenido del bloque original</strong>
-        {% endblock %}
+            <strong>Contenido del bloque original</strong>
+            {% endblock %}
+        </div>
+       
     </div>
     <hr>
     <footer>
