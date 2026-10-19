@@ -79,26 +79,30 @@ def crear_articulo(request, title, content, public):
     return HttpResponse(f"Articulo creado: <strong>{articulo.title}</strong>")
 
 def articulo(request):
-    articulos = Article.objects.all()
-    return render(request, 'articulo.html', {'articulos': articulos})
+
+    try:
+        articulo = Article.objects.get(title="Matrix", public=False)
+        response = f"Articulo:<br/>{articulo.id}. {articulo.title} "
+    except:
+        response = "<h1>Artículo no encontrado</h1>"
+
+    return HttpResponse(response)
 
 def editar_articulo(request, id):
-    articulo = get_object_or_404(Article, id=id)
+    articulo = Article.objects.get(pk=id)
 
-    if request.method == 'POST':
-        title = request.POST.get('title', '').strip()
-        content = request.POST.get('content', '').strip()
+    articulo.title = "Batman"
+    articulo.content = "Pelicula del 2017"
+    articulo.public = True
 
-        if title and content:
-            articulo.title = title
-            articulo.content = content
-            articulo.public = request.POST.get('public') == 'on'
-            articulo.save()
-            return redirect('articulo')
+    articulo.save()
 
-        return render(request, 'editar_articulo.html', {
-            'articulo': articulo,
-            'error': 'El título y el contenido son obligatorios.',
-        })
+    return HttpResponse(f"Articulo {articulo.id} actualizado: <strong>{articulo.title}</strong> - <strong>{articulo.content}</strong>")
 
-    return render(request, 'editar_articulo.html', {'articulo': articulo})
+def articulos(request):
+    
+    articulos = Article.objects.all()
+    
+    return render(request, 'articulos.html', {
+        'articulos': articulos
+    })
