@@ -1,6 +1,5 @@
-from django.shortcuts import render, HttpResponse, redirect, get_object_or_404
-from miapp.models import Article, Category
-
+from django.shortcuts import render, HttpResponse, redirect
+from miapp.models import Article
 # Create your views here.
 # MVC = Modelo vista controlador -> Acciones (Metodos)
 # MVT = Modelo template  vista ->  Acciones (Metodos)
@@ -112,3 +111,25 @@ def borrar_articulo(request, id):
     articulo.delete()
     
     return redirect('articulos')
+def save_article(request):
+    if request.method == 'POST':
+        title = request.POST['title']
+        if len(title) < 5:
+            return HttpResponse("<h2>El título es muy pequeño (mínimo 5 caracteres)</h2>")
+        
+        content = request.POST['content']
+        public = request.POST['public']
+
+        articulo = Article(
+            title=title,
+            content=content,
+            public=public
+        )
+        articulo.save()
+        return HttpResponse(f"Artículo creado: <strong>{articulo.title}</strong> - {articulo.content}")
+    else:
+        return HttpResponse("<h2>No se ha podido crear el artículo</h2>")
+
+# Vista que carga la plantilla del formulario simple
+def create_article(request):
+    return render(request, 'create_article.html')

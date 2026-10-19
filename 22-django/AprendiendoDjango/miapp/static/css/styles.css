@@ -127,3 +127,53 @@ footer{
     padding-bottom: 20px;
     box-shadow: 0px 0px 20px gray;
 }
+
+/* Estilos para formulario */
+.box form {
+    width: 40%;
+}
+
+.box form input,
+.box form label {
+    display: block;
+    padding: 5px;
+    padding-left: 0px;
+}
+
+.box form input[type="text"],
+.box form textarea,
+.box form select {
+    width: 100%;
+    margin-bottom: 10px;
+}
+
+.box form select {
+    width: 70px;
+    padding: 5px;
+}
+
+/* Botón */
+.box form input[type="submit"],
+.box form input[type="button"],
+.box form button {
+    padding: 10px;
+    margin-top: 5px;
+    background: #2ba977;
+    border: 1px solid #444;
+    color: white;
+    transition: 300ms all;
+    border-radius: 7px;
+}
+
+.box form input[type="submit"]:hover,
+.box form input[type="button"]:hover,
+.box form button:hover {
+    cursor: pointer;
+    background: #1f7e58;
+}
+
+/* Clase de validación de errores */
+.rojo {
+    color: red;
+    box-shadow: 0px 0px 4px black;
+}
