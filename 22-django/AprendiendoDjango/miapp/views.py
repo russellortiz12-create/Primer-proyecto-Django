@@ -1,4 +1,4 @@
-from django.shortcuts import render, HttpResponse, redirect
+from django.shortcuts import render, HttpResponse, redirect, get_object_or_404
 from miapp.models import Article, Category
 
 # Create your views here.
@@ -61,17 +61,44 @@ def pagina(request, redirigir = 0):
     return render(request, 'pagina.html')
 
 def contacto(request, nombre="", apellidos=""):
-        html = ""
-        if  nombre and apellidos:
-            html += "<p>El nombre completo es: </p>"
-            html += f"<h3>{nombre} {apellidos}</h3>"
-        return HttpResponse(layout+f"<h2>Contacto </h2>"+html)
+    html = ""
+    
+    if nombre and apellidos:
+        html += "<p>El nombre completo es:</p>"
+        html += f"<h3>{nombre} {apellidos}</h3>"
+        
+    return HttpResponse(layout+f"<h2>Contacto</h2>"+html) 
 
-def crear_articulo(request):
+def crear_articulo(request, title, content, public):
     articulo = Article(
-        title = 'Primer articulo!!',
-        content= 'Contenido del articulo',
-        public= True
+        title=title,
+        content=content,
+        public=public
     )
     articulo.save()
-    return HttpResponse("Usuario creado: ")
+    return HttpResponse(f"Articulo creado: <strong>{articulo.title}</strong>")
+
+def articulo(request):
+    articulos = Article.objects.all()
+    return render(request, 'articulo.html', {'articulos': articulos})
+
+def editar_articulo(request, id):
+    articulo = get_object_or_404(Article, id=id)
+
+    if request.method == 'POST':
+        title = request.POST.get('title', '').strip()
+        content = request.POST.get('content', '').strip()
+
+        if title and content:
+            articulo.title = title
+            articulo.content = content
+            articulo.public = request.POST.get('public') == 'on'
+            articulo.save()
+            return redirect('articulo')
+
+        return render(request, 'editar_articulo.html', {
+            'articulo': articulo,
+            'error': 'El título y el contenido son obligatorios.',
+        })
+
+    return render(request, 'editar_articulo.html', {'articulo': articulo})
