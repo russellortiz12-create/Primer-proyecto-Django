@@ -35,11 +35,20 @@ def index(request):
     year = 2024
     while year <= 2050:
         if year % 2 == 0:
-          html += f"<li>{str(year)}</li>"
+            html += f"<li>{str(year)}</li>"
         year += 1
 
     html += "</ul>"
-    return render(request, 'index.html')
+
+    nombre = 'Carlos Gomez 2'
+    lenguajes = ['JavaScript', 'Python', 'PHP', '#C']
+
+    return render(request, 'index.html', {
+    'title': 'Inicio 2',
+    'mi_variable': 'Soy un dato que esta en la vista',
+    'nombre': nombre,
+    'lenguajes': lenguajes,
+})
 
 def hola_mundo(request):
     return render(request, 'hola_mundo.html')

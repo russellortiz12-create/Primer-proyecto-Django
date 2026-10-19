@@ -2,8 +2,30 @@
 
 {% block title %} Inicio {% endblock %}
 {% block content %}
-<h1 class="title">Inicio</h1>
- <p> Años hasta el 2050: </p>
+{% include 'fecha-actual.html' %}
 
- {% endblock %}
-        
+<!--Esto es un comentario en HTML-->
+{% comment "Esto es un comentario django" %}
+    <h1>Prueba cometario</h1>
+{% endcomment %}
+
+<h1 class="title">{{title}}</h1>
+
+<p>{{mi_variable}}</p>
+
+{% if nombre and nombre == 'Carlos Gomez' %}
+    <p>{{nombre}}</p>
+{% else %}
+    <strong>El nombre no existe o no coinciden</strong>
+{% endif %}
+
+<h3>Listado de lenguajes de programación</h3>
+<ul>
+    {% for lenguaje in lenguajes %}
+        <li>{{lenguaje}}</li>
+    {% endfor %}
+</ul>
+
+<p>Años hasta el 2050:</p>
+
+{% endblock %}
