@@ -1,3 +1,5 @@
+{% load static %}
+
 <!doctype html>
 <html lang="es">
 <head>
@@ -7,29 +9,40 @@
         {% block title %}
     
         {% endblock %}
-        | ADSO SENA</title>
+        | ADSO SENA
+    </title>
+    <link rel="stylesheet" type="text/css" href="{% static 'css/styles.css' %}"/>
      
 </head>
 <body>
-    <h1>Sitio WEB con Django | ADSO SENA </h1>
-    <hr/>
-    <ul>
-        <li>
-            <a href="/inicio">Inicio</a>
-        </li>
-        <li>
-            <a href="/hola-mundo">Hola mundo</a>
-        </li>
-        <li>
-            <a href="/pagina-pruebas">Pagina pruebas</a>
-        </li>
-        <li>
-            <a href="/contacto">contacto</a>
-        </li>
-    </ul>
-    <hr/>
+
+    <!-- Cabecera de la pagina-->
+    <header>
+        <div id"logotipo">
+            <!-- logo Django-->
+            <h1> Sitio WEB con Django </h1>
+        </div>
+    </header>
+
+    <nav>
+            <ul>
+                <li>
+                    <a href="/inicio">Inicio</a>
+                </li>
+                <li>
+                    <a href="/hola-mundo">Hola Mundo</a>
+                </li>
+                <li>
+                    <a href="/pagina-pruebas">Página de Pruebas</a>
+                </li>
+                <li>
+                    <a href="/contacto">Contacto</a>
+                </li>
+            </ul>
+    </nav>
 
     <div id="content">
+        <h2 class="title"Titulo de prueba></h2>
         {% block content %}
             <!-- Código que viene de los templates -->
              <strong>contenido del bloque original</strong>
