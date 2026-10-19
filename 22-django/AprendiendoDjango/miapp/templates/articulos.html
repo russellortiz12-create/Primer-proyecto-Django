@@ -6,14 +6,16 @@
 
 <h1 class="title">Listado de Artículos</h1>
 
-<ul>
-    {% for articulo in articulos %}
-        <li>
-            <strong>{{ articulo.title }}</strong> - {{ articulo.content }}
-        </li>
-    {% empty %}
-        <p>No hay artículos disponibles.</p>
-    {% endfor %}
-</ul>
+    <ul>
+        {% for articulo in articulos %}
+            <li>
+                <h4>{{ articulo.id }} {{ articulo.title }}</h4>
+                <span>{{ articulo.created_at }}</span>
+                <p>{{ articulo.content }}</p>
+                <a href="{% url 'borrar' id=articulo.id %}">Borrar</a>
+                <br/>
+            </li>
+        {% endfor %}
+    </ul>
 
 {% endblock %}
