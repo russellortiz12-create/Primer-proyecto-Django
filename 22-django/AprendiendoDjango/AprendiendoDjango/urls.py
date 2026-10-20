@@ -17,6 +17,8 @@ Including another URLconf
 from django.contrib import admin
 from django.urls import path
 from miapp import views
+from django.conf import settings
+from django.conf.urls.static import static
 
 urlpatterns = [
     path('admin/', admin.site.urls),
@@ -33,6 +35,10 @@ urlpatterns = [
     path('articulos/', views.articulos, name="articulos"),
     path('borrar-articulo/<int:id>', views.borrar_articulo, name="borrar"),
     path('save-article/', views.save_article, name="save"),
-path('create-article/', views.create_article, name="create"),
-    
+    path('create-article/', views.create_article, name="create"),
+    path('create-full-article/', views.create_full_article, name="create_full"),
 ]
+
+# Configurar para cargar imágenes en modo desarrollo
+if settings.DEBUG:
+    urlpatterns += static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)

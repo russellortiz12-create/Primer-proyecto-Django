@@ -1,5 +1,7 @@
 from django.shortcuts import render, HttpResponse, redirect
 from miapp.models import Article
+from miapp.forms import FormArticle
+from django.contrib import messages
 # Create your views here.
 # MVC = Modelo vista controlador -> Acciones (Metodos)
 # MVT = Modelo template  vista ->  Acciones (Metodos)
@@ -99,8 +101,8 @@ def editar_articulo(request, id):
     return HttpResponse(f"Articulo {articulo.id} actualizado: <strong>{articulo.title}</strong> - <strong>{articulo.content}</strong>")
 
 def articulos(request):
-    
-    articulos = Article.objects.all()
+    # Mostramos solo los artículos que están publicados y ordenados por id
+    articulos = Article.objects.filter(public=True).order_by('id')
     
     return render(request, 'articulos.html', {
         'articulos': articulos
@@ -133,3 +135,33 @@ def save_article(request):
 # Vista que carga la plantilla del formulario simple
 def create_article(request):
     return render(request, 'create_article.html')
+
+def create_full_article(request):
+    if request.method == 'POST':
+        formulario = FormArticle(request.POST)
+
+        if formulario.is_valid():
+            data_form = formulario.cleaned_data
+
+            title = data_form.get('title')
+            content = data_form['content']
+            public = data_form['public']
+
+            articulo = Article(
+                title=title,
+                content=content,
+                public=public
+            )
+            articulo.save()
+
+            # Mensaje flash
+            messages.success(request, f'Ha creado correctamente el artículo {articulo.id}')
+
+            return redirect('articulos')
+
+    else:
+        formulario = FormArticle()
+
+    return render(request, 'create_full_article.html', {
+        'form': formulario
+    })
