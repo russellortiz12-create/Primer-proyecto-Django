@@ -1,0 +1,51 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <title>{% block title %}Proyecto con Django{% endblock %}</title>
+    <link rel="stylesheet" href="{% static 'css/styles.css' %}">
+</head>
+<body>
+    
+    <!-- Cabecera del sitio -->
+    <header>
+        <div id="logotipo">
+            <img src="{% static 'images/django_logo.png' %}" alt="Logo Django" width="50" style="width: 50px; height: auto;">
+            <h1>Proyecto con Django</h1>
+        <div class="clearfix"></div>
+</div>
+    </header>
+
+    <!-- Barra de navegación -->
+    <nav>
+        <ul>
+            <li>
+                <a href="{% url 'index' %}">Inicio</a>
+            </li>
+            <!-- Páginas dinámicas visibles administradas desde Django Admin -->
+            {% for page in pages %}
+                <li>
+                    <a href="{% url 'page' page.slug %}">{{ page.title }}</a>
+                </li>
+            {% endfor %}
+        </ul>
+    </nav>
+
+    <!-- Contenido principal -->
+    <div id="content">
+        <div class="box">
+            <h2 class="title"></h2>
+            {% block content %}
+                <p>Contenido por defecto...</p>
+            {% endblock %}
+        </div>
+    </div>
+
+    <!-- Pie de página -->
+    <footer>
+        Programación con Django - ADSO 2026 &copy; Instructor Moisés Garcia - {% now "d/m/Y h:m:s" %}
+    </footer>
+
+</body>
+</html>
